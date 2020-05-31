@@ -144,22 +144,22 @@ def _run_thread_job(model_params):  # pragma: no cover
         model.set_params(**model_params)    
         model.fit(X_train, y_train)
         # Compute the score for the given parameters, scoring metric, and model.
-        if scoring is None: # use default model.score() if it exists, else use accuracy
-            if hasattr(model, 'score'):        
-                score = model.score(X_val, y_val)
-            else:            
-                score = metrics.accuracy_score(
-                    y_val,
-                    model.predict(X_val),
-                )
+        #if scoring is None: # use default model.score() if it exists, else use accuracy
+           # if hasattr(model, 'score'):        
+            #    score = model.score(X_val, y_val)
+          #  else:            
+              #  score = metrics.accuracy_score(
+              #      y_val,
+               #     model.predict(X_val),
+              #  )
         # Or you provided your own scoring class
       #  elif type(scoring) in [metrics.scorer._PredictScorer, metrics.scorer._ProbaScorer] \
          #   or metrics.scorer._PredictScorer in type(scoring).__bases__ \
          #   or metrics.scorer._ProbaScorer in type(scoring).__bases__:
          #   score = scoring(model, job_params["X_val"], job_params["y_val"])
         # You provided a string specifying the metric, e.g. 'accuracy'
-        else:
-            score = metrics.precision_score(y_val, model.predict(X_val))
+        #else:
+        score = metrics.precision_score(y_val, model.predict(X_val))
         return (model, score)
 
     except Exception as e:
