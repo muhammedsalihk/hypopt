@@ -153,10 +153,10 @@ def _run_thread_job(model_params):  # pragma: no cover
                     model.predict(X_val),
                 )
         # Or you provided your own scoring class
-        elif type(scoring) in [metrics.scorer._PredictScorer, metrics.scorer._ProbaScorer] \
-            or metrics.scorer._PredictScorer in type(scoring).__bases__ \
-            or metrics.scorer._ProbaScorer in type(scoring).__bases__:
-            score = scoring(model, job_params["X_val"], job_params["y_val"])
+      #  elif type(scoring) in [metrics.scorer._PredictScorer, metrics.scorer._ProbaScorer] \
+         #   or metrics.scorer._PredictScorer in type(scoring).__bases__ \
+         #   or metrics.scorer._ProbaScorer in type(scoring).__bases__:
+         #   score = scoring(model, job_params["X_val"], job_params["y_val"])
         # You provided a string specifying the metric, e.g. 'accuracy'
         else:
             score = metrics.precision_score(y_val, model.predict(X_val))
