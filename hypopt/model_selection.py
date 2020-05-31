@@ -159,13 +159,7 @@ def _run_thread_job(model_params):  # pragma: no cover
             score = scoring(model, job_params["X_val"], job_params["y_val"])
         # You provided a string specifying the metric, e.g. 'accuracy'
         else:
-            score = _compute_score(
-                model = model,
-                X = X_val, 
-                y = y_val,
-                scoring_metric = scoring,
-                scoring_params = scoring_params
-            )
+            score = metrics.precision_score(y_val, model.predict(X_val))
         return (model, score)
 
     except Exception as e:
