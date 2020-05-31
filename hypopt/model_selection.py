@@ -160,6 +160,7 @@ def _run_thread_job(model_params):  # pragma: no cover
         # You provided a string specifying the metric, e.g. 'accuracy'
         #else:
         score = 0
+        print(f'The score is {score}')
         return (model, score)
 
     except Exception as e:
