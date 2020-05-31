@@ -164,7 +164,7 @@ def _run_thread_job(model_params):  # pragma: no cover
                 X = X_val, 
                 y = y_val,
                 scoring_metric = scoring,
-                scoring_params = scoring_params,
+                scoring_params = scoring_params
             )
         return (model, score)
 
