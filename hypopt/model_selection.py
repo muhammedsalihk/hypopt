@@ -159,8 +159,16 @@ def _run_thread_job(model_params):  # pragma: no cover
          #   score = scoring(model, job_params["X_val"], job_params["y_val"])
         # You provided a string specifying the metric, e.g. 'accuracy'
         #else:
-        score = metrics.f1_score(y_val, model.predict(X_val), average = 'micro')
-        print(f'The score is {score}')
+        if scoring == None:
+            scoring = 'accuracy'
+        score = _compute_score(
+                model = model,
+                X = X_val, 
+                y = y_val,
+                scoring_metric = scoring,
+                scoring_params = scoring_params,
+            )
+        print(f'The {scoring} score is {score}')
         return (model, score)
 
     except Exception as e:
@@ -428,18 +436,14 @@ class GridSearch(BaseEstimator):
         sample_weight : np.array<float> of shape (n,) or (n, 1)
           Weights each example when computing the score / accuracy.'''
 
-        if hasattr(self.model, 'score'):
-
-            # Check if sample_weight in clf.score(). Compatible with Python 2/3.
-            if hasattr(inspect, 'getfullargspec') and \
-            'sample_weight' in inspect.getfullargspec(self.model.score).args or \
-            hasattr(inspect, 'getargspec') and \
-            'sample_weight' in inspect.getargspec(self.model.score).args:  
-                return self.model.score(X, y, sample_weight=sample_weight)
-            else:
-                return self.model.score(X, y)
-        else:
-            return metrics.accuracy_score(y, self.model.predict(X), sample_weight=sample_weight) 
+        score_calc = _compute_score(
+                model = model,
+                X = X_val, 
+                y = y_val,
+                scoring_metric = scoring,
+                scoring_params = scoring_params,
+            )
+        return score_calc   
 
 
     def get_param_scores(self):
