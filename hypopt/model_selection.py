@@ -159,7 +159,7 @@ def _run_thread_job(model_params):  # pragma: no cover
          #   score = scoring(model, job_params["X_val"], job_params["y_val"])
         # You provided a string specifying the metric, e.g. 'accuracy'
         #else:
-        if scoring == None:
+        if scoring is None:
             scoring = 'accuracy'
         score = _compute_score(
                 model = model,
