@@ -435,9 +435,9 @@ class GridSearch(BaseEstimator):
           Weights each example when computing the score / accuracy.'''
 
         score_calc = _compute_score(
-                model = model,
-                X = X_val, 
-                y = y_val,
+                model = self.model,
+                X = X, 
+                y = y,
                 scoring_metric = scoring,
                 scoring_params = scoring_params,
             )
